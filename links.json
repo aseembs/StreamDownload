@@ -1,0 +1,14 @@
+[
+  {
+    "number": 1,
+    "title": "Video number 1",
+    "date": "2021-02-23",
+    "link": "https://example.cloudfront.net/production/recordings/example_video_1.m3u8"
+  },
+  {
+    "number": 2,
+    "title": "Video number 1",
+    "date": "2021-02-25",
+    "link": "https://example.cloudfront.net/production/recordings/example_video_2.m3u8"
+  }
+]
