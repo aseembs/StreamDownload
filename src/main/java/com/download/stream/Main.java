@@ -3,6 +3,7 @@ package com.download.stream;
 import com.download.stream.pojo.VideoLink;
 import com.download.stream.utils.CommandLineUtils;
 import com.download.stream.utils.JsonUtils;
+import com.download.stream.utils.PCloudUtils;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,6 +19,7 @@ public class Main {
                     "file,http,https,tcp,tls,crypto", "-i", i.getLink(), "-c", "copy", filePath);
             try {
                 CommandLineUtils.executeCommand(pb);
+                PCloudUtils.uploadFile(filePath);
             } catch (Exception e) {
                 e.printStackTrace();
             }
