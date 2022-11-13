@@ -1,0 +1,36 @@
+package com.download.stream.utils;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+public class CommandLineUtils {
+
+    public static void executeCommand(String command) throws IOException, InterruptedException {
+        Process proc = Runtime.getRuntime().exec(command);
+        displayStreams(proc.getErrorStream(), "Error");
+        displayStreams(proc.getInputStream(), "Input");
+        proc.waitFor();
+    }
+
+    public static void executeCommand(ProcessBuilder processBuilder) throws IOException, InterruptedException {
+        Process proc = processBuilder.start();
+        displayStreams(proc.getErrorStream(), "Error");
+        displayStreams(proc.getInputStream(), "Input");
+        proc.waitFor();
+    }
+
+
+    private static void displayStreams(InputStream inputStream, String label) throws IOException {
+        String line;
+        InputStreamReader isr = new InputStreamReader(inputStream);
+        BufferedReader rdr = new BufferedReader(isr);
+        System.out.println("**********\n" + label +"\n**********");
+        int i = 0;
+        while((line = rdr.readLine()) != null) {
+            System.out.print(++i + ": ");
+            System.out.println(line);
+        }
+    }
+}
