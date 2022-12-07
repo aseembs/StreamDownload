@@ -7,6 +7,11 @@ import java.io.InputStreamReader;
 
 public class CommandLineUtils {
 
+    public static ProcessBuilder getFfmpegCommand(String link, String filePath) {
+        return new ProcessBuilder("ffmpeg", "-protocol_whitelist",
+                "file,http,https,tcp,tls,crypto", "-i", link, "-c", "copy", filePath);
+    }
+
     public static void executeCommand(String command) throws IOException, InterruptedException {
         Process proc = Runtime.getRuntime().exec(command);
         displayStreams(proc.getErrorStream(), "Error");

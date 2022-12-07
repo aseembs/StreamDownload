@@ -15,8 +15,7 @@ public class Main {
         CommandLineUtils.executeCommand("mkdir -p /tmp");
         videoLinks.forEach(i -> {
             final String filePath = String.format("/tmp/[%d] %s %s.mp4", i.getNumber(), i.getTitle(), i.getDate());
-            ProcessBuilder pb = new ProcessBuilder("ffmpeg", "-protocol_whitelist",
-                    "file,http,https,tcp,tls,crypto", "-i", i.getLink(), "-c", "copy", filePath);
+            ProcessBuilder pb = CommandLineUtils.getFfmpegCommand(i.getLink(), filePath);
             try {
                 CommandLineUtils.executeCommand(pb);
                 PCloudUtils.uploadFile(filePath);
