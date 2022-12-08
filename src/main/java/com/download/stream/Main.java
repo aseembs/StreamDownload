@@ -15,7 +15,7 @@ public class Main {
         CommandLineUtils.executeCommand("mkdir -p /tmp");
         videoLinks.forEach(i -> {
             final String filePath = String.format("/tmp/[%d] %s %s.mp4", i.getNumber(), i.getTitle(), i.getDate());
-            ProcessBuilder pb = CommandLineUtils.getFfmpegCommand(i.getLink(), filePath);
+            ProcessBuilder pb = CommandLineUtils.getYoutubeDlCommand(i.getLink(), filePath, System.getenv("COOKIES"));
             try {
                 CommandLineUtils.executeCommand(pb);
                 PCloudUtils.uploadFile(filePath);

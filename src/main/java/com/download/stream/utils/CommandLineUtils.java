@@ -12,6 +12,14 @@ public class CommandLineUtils {
                 "file,http,https,tcp,tls,crypto", "-i", link, "-c", "copy", filePath);
     }
 
+    public static ProcessBuilder getYoutubeDlCommand(String link, String filePath, String cookies) {
+        ProcessBuilder pb = new ProcessBuilder("youtube-dl", link, "-f", "bestvideo+bestaudio/best",
+                "-o", filePath);
+        if(cookies != null)
+            return pb.command("--add-header", cookies);
+        return pb;
+    }
+
     public static void executeCommand(String command) throws IOException, InterruptedException {
         Process proc = Runtime.getRuntime().exec(command);
         displayStreams(proc.getErrorStream(), "Error");
