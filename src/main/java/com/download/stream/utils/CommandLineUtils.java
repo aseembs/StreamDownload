@@ -13,11 +13,13 @@ public class CommandLineUtils {
     }
 
     public static ProcessBuilder getYoutubeDlCommand(String link, String filePath, String cookies) {
-        ProcessBuilder pb = new ProcessBuilder("youtube-dl", link, "-f", "bestvideo+bestaudio/best",
+        if(cookies == null)
+            return new ProcessBuilder("youtube-dl", link, "-f", "bestvideo+bestaudio/best",
                 "-o", filePath);
-        if(cookies != null)
-            return pb.command("--add-header", cookies);
-        return pb;
+        else
+            return new ProcessBuilder("/bin/bash", "-c",
+                    " youtube-dl " + link + " -f " + "bestvideo+bestaudio/best " +
+                    "-o '" + filePath + "' --add-header " + "'" + cookies + "'");
     }
 
     public static void executeCommand(String command) throws IOException, InterruptedException {

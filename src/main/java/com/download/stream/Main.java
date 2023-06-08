@@ -18,7 +18,7 @@ public class Main {
             ProcessBuilder pb = CommandLineUtils.getYoutubeDlCommand(i.getLink(), filePath, System.getenv("COOKIES"));
             try {
                 CommandLineUtils.executeCommand(pb);
-                PCloudUtils.uploadFile(filePath);
+                //PCloudUtils.uploadFile(filePath);
             } catch (Exception e) {
                 e.printStackTrace();
             }
